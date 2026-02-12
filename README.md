@@ -1,26 +1,43 @@
 # Sheets KV REST Wrapper
 
-Quickstart guide for running the Google Sheets-backed KV API locally.
+Google Sheets-backed Key–Value REST API. Lightweight proof-of-concept for storing
+small datasets without running a database server.
 
-## Purpose
+## Overview
 
-This project exposes a simple Key–Value REST API backed by a single Google Spreadsheet.
-It is intended as a lightweight proof-of-concept to store and retrieve small datasets
-without running a database server. Each sheet tab is treated as a collection, and
-keys/values are stored in columns A and B.
+- Each sheet tab = collection
+- Column A = key (id)
+- Column B = value (string)
 
-## Prerequisites
+## Features
+
+- CRUD for keys
+- Collections management (tabs)
+- Batch operations
+- Flush endpoint (rebuild index)
+- Swagger UI
+
+## Tech Stack
+
+- Java 17
+- Spring Boot 3
+- Maven
+- Google Sheets API v4
+
+## Getting Started
+
+### Prerequisites
 
 - Java 17+
 - Maven 3.9+
-- A public Google Spreadsheet with edit access for “anyone with the link”
-- Google Sheets API key (for read-only access)
-- Service account JSON (for write access without UI login)
-- Sheet structure requirements:
+- A Google Spreadsheet shared for access
+- Google Sheets API key (read-only)
+- Service account JSON (write access without UI login)
+- Sheet structure:
     - Each tab represents a collection
     - Column A = key (id), Column B = value (string)
 
-## Configure
+### Configuration
 
 Edit [src/main/resources/application.yml](src/main/resources/application.yml):
 
@@ -33,24 +50,11 @@ Classpath support:
 - If the JSON is placed in `src/main/resources`, set the value as `classpath:<file>`.
     Example: `classpath:service-account.json` or `classpath:keys/my-sa.json`.
 
-### How to get the Google Sheets API key
-
-1. Go to Google Cloud Console: https://console.cloud.google.com/
-2. Create or select a project.
-3. Enable the Google Sheets API (APIs & Services → Library → Google Sheets API → Enable).
-4. Create credentials (APIs & Services → Credentials → Create Credentials → API key).
-5. Optional: Restrict the key (HTTP referrers or IPs) and limit it to the Sheets API.
-
-### Sheet ownership and sharing
-
-- The sheet does not need to be owned by the same project or organization that created the API key.
-- The sheet must be shared to allow access; for writes, set “anyone with the link can edit”.
-
 Example:
 
-    sheet:
-      publicUrl: https://docs.google.com/spreadsheets/d/XXXX
-      apiKey: YOUR_API_KEY
+        sheet:
+            publicUrl: https://docs.google.com/spreadsheets/d/XXXX
+            apiKey: YOUR_API_KEY
             serviceAccountJsonPath: /absolute/path/to/service-account.json
 
 Example (classpath):
@@ -60,31 +64,39 @@ Example (classpath):
             apiKey: YOUR_API_KEY
             serviceAccountJsonPath: classpath:service-account.json
 
-### Create a service account (no UI login)
+### API Key (read-only)
+
+1. Go to Google Cloud Console: https://console.cloud.google.com/
+2. Create or select a project.
+3. Enable the Google Sheets API.
+4. Create an API key (APIs & Services → Credentials).
+5. Optional: restrict the key to the Sheets API.
+
+### Service Account (write access, no UI login)
 
 1. Open Google Cloud Console: https://console.cloud.google.com/
 2. Create or select a project.
-3. Enable the Google Sheets API (APIs & Services → Library → Google Sheets API → Enable).
+3. Enable the Google Sheets API.
 4. Create a service account (IAM & Admin → Service Accounts → Create).
-5. Create a JSON key for the service account (Keys → Add Key → Create new key → JSON).
-6. Share the target spreadsheet with the service account email as an Editor.
+5. Create a JSON key (Keys → Add Key → Create new key → JSON).
+6. Share the spreadsheet with the service account email as an Editor.
 7. Set `sheet.serviceAccountJsonPath` to the JSON file path.
 
-## Run
+### Run
 
 From the project root:
 
-    mvn spring-boot:run
+        mvn spring-boot:run
 
 Service starts at `http://localhost:8080`.
 
-## Verify
+## Usage
 
 - Health: `GET /v1/health`
 - Flush: `POST /v1/flush`
 - Swagger UI: `/swagger-ui.html`
 
-## Test with Postman
+## Postman
 
 Import [postman_collection.json](postman_collection.json) and execute the requests.
 
