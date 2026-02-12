@@ -1,0 +1,368 @@
+{
+    "info": {
+        "name": "Sheets KV REST Wrapper",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Health",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:8080/v1/health",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "health"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Flush",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:8080/v1/flush",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "flush"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Collections",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"users\"}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Rename",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"newName\":\"users_new\"}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "KV",
+            "item": [
+                {
+                    "name": "Get",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users/keys/u1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users",
+                                "keys",
+                                "u1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Upsert",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"value\":\"{\\\"name\\\":\\\"Dejan\\\"}\"}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users/keys/u1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users",
+                                "keys",
+                                "u1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users/keys/u1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users",
+                                "keys",
+                                "u1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "List Keys",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users/keys?limit=100",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users",
+                                "keys"
+                            ],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "100"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "List Entries",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users/entries?limit=100",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users",
+                                "entries"
+                            ],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "100"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Batch",
+            "item": [
+                {
+                    "name": "Batch Get",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"ids\":[\"u1\",\"u2\"]}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users/batchGet",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users",
+                                "batchGet"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Batch Upsert",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"items\":[{\"id\":\"u1\",\"value\":\"v1\"},{\"id\":\"u2\",\"value\":\"v2\"}]}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users/batchUpsert",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users",
+                                "batchUpsert"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Batch Delete",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"ids\":[\"u1\",\"u2\"]}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/v1/collections/users/batchDelete",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "v1",
+                                "collections",
+                                "users",
+                                "batchDelete"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

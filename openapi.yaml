@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: Google Sheets KV REST Wrapper
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080/v1
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200":
+          description: OK
+  /flush:
+    post:
+      summary: Force reindex
+      responses:
+        "200":
+          description: OK
+  /collections:
+    get:
+      summary: List collections
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Create collection
+      requestBody:
+        required: true
+      responses:
+        "204":
+          description: Created
+  /collections/{collection}:
+    delete:
+      summary: Delete collection
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+    patch:
+      summary: Rename collection
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+      responses:
+        "204":
+          description: Renamed
+  /collections/{collection}/keys/{id}:
+    get:
+      summary: Get value
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    put:
+      summary: Upsert value
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+      responses:
+        "204":
+          description: Upserted
+    delete:
+      summary: Delete value
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+  /collections/{collection}/keys:
+    get:
+      summary: List keys
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /collections/{collection}/entries:
+    get:
+      summary: List entries
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /collections/{collection}/batchGet:
+    post:
+      summary: Batch get
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+      responses:
+        "200":
+          description: OK
+  /collections/{collection}/batchUpsert:
+    post:
+      summary: Batch upsert
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+      responses:
+        "200":
+          description: OK
+  /collections/{collection}/batchDelete:
+    post:
+      summary: Batch delete
+      parameters:
+        - name: collection
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+      responses:
+        "200":
+          description: OK

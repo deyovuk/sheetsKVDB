@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+sheet:
+  publicUrl: ""
+  apiKey: ""
+  serviceAccountJsonPath: "classpath:service-account.json"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
