@@ -1,7 +1,13 @@
-# Sheets KV REST Wrapper
+# Google Sheets Key-Value Database (SheetsKVDB)
 
-Google Sheets-backed Key–Value REST API. Lightweight proof-of-concept for storing
+Google Sheets-backed Key–Value REST-managed DB. Lightweight proof-of-concept for storing
 small datasets without running a database server.
+
+Why is this project created?
+- Because I wanted a storage layer with zero schema migrations, zero auth setup, and one config file. A sheet tab + two columns gets me a KV store in minutes.
+- Because Firestore has a generous free tier, but as of 2025 it still requires enabling Blaze with a credit card. My pet projects are allergic to billing dashboards.
+- Because Supabase is great, but it is still PostgreSQL: schema, roles, migrations, and a full relational model for a use case that just needs `id -> value`.
+- Because I can. And because writing data into cell B12 feels oddly satisfying.
 
 ## Overview
 
