@@ -26,6 +26,11 @@ small datasets without running a database server.
 
 ## Getting Started
 
+### Project Structure
+
+- sheetsKV-core: reusable library with Google Sheets integration and core logic
+- sheetsKV-service: Spring Boot HTTP service that depends on sheetsKV-core
+
 ### Prerequisites
 
 - Java 17+
@@ -39,7 +44,7 @@ small datasets without running a database server.
 
 ### Configuration
 
-Edit [src/main/resources/application.yml](src/main/resources/application.yml):
+Edit [sheetsKV-service/src/main/resources/application.yml](sheetsKV-service/src/main/resources/application.yml):
 
 - `sheet.publicUrl`: full Google Sheets URL (or spreadsheet id)
 - `sheet.apiKey`: Google API key
@@ -86,7 +91,7 @@ Example (classpath):
 
 From the project root:
 
-        mvn spring-boot:run
+    mvn -pl sheetsKV-service spring-boot:run
 
 Service starts at `http://localhost:8080`.
 
